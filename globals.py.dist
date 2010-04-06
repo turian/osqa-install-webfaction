@@ -15,3 +15,9 @@ SERVERIP    = None          # Webfaction IP address of the server where
                             # This is useful if you bought static IP
                             # addresses.
 WEBSITENAME = APPNAME       # Webfaction website name
+DATABASENAME = ("%s_%s" % (USERNAME, APPNAME))[:16]    # Webfaction database name
+DATABASEPASSWORD = None     # Webfaction database password. If None,
+                            # pick a random password.
+MAILBOXUSERNAME = APPNAME   # Webfaction mailbox username
+MAILBOXPASSWORD = None      # Webfaction mailbox password. If None,
+                            # pick a random password.

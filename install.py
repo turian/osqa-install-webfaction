@@ -9,13 +9,17 @@ session_id, account = server.login(USERNAME, PASSWORD)
 #print repr(account)
 #{'username': 'test5', 'home': '/home2', 'id': 237} 
 
-# TODO: See if the domain exists and remove it if it does?
+
 
 # Add the domain
+# TODO: See if the domain exists and remove it if it does?
 r = server.create_domain(session_id, DOMAINNAME)
 print "server.create_domain(%s): %s" % (DOMAINNAME, r)
 # TODO: Add www and stats subdomains
 #server.create_domain(session_id, DOMAINNAME, "www", "stats")
+
+
+
 
 # See if the application already exists.
 r = server.list_apps(session_id)
@@ -40,6 +44,10 @@ if SERVERIP is None:
     SERVERIP = server.list_websites(session_id)[0]["ip"]
     print "No SERVERIP given. Using %s" % SERVERIP
 
+
+
+
+
 # See if the website already exists.
 r = server.list_websites(session_id)
 to_delete = False
@@ -57,5 +65,35 @@ if to_delete:
 # TODO: Add https here
 # TODO: Add subdomains www and stats here
 # TODO: Add path location of application here
-print (session_id, WEBSITENAME, SERVERIP, False, [DOMAINNAME], [[APPNAME, "/"],])
-print server.create_website(session_id, WEBSITENAME, SERVERIP, False, [DOMAINNAME], [APPNAME, "/"])
+r = server.create_website(session_id, WEBSITENAME, SERVERIP, False, [DOMAINNAME], [APPNAME, "/"])
+print "server.create_website: %s" % r
+
+
+
+
+if DATABASEPASSWORD is None:
+    import randompassword
+    DATABASEPASSWORD = randompassword.GenPasswd2()
+    print "No DATABASEPASSWORD given. Using %s" % DATABASEPASSWORD
+
+# Create the database
+# TODO: Allow PostgreSQL
+r = server.create_db(session_id, DATABASENAME, "mysql", DATABASEPASSWORD)
+print "server.create_db: %s" % r
+
+
+# TODO: Add a static media server
+
+
+if MAILBOXPASSWORD is None:
+    import randompassword
+    MAILBOXPASSWORD = randompassword.GenPasswd2()
+    print "No MAILBOXPASSWORD given. Using %s" % MAILBOXPASSWORD
+
+# Configure mailbox
+for i in server.list_mailboxes(session_id):
+    print i
+r = server.create_mailbox(session_id, MAILBOXUSERNAME, enable_spam_protection=True, discard_spam=False, spam_redirect_folder='', use_manual_procmailrc=False, manual_procmailrc='')
+print "server.create_mailbox: %s" % r
+r = server.change_mailbox_password(session_id, MAILBOXUSERNAME, MAILBOXPASSWORD)
+print "server.change_mailbox_password: %s" % r

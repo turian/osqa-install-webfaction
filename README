@@ -12,3 +12,5 @@ Instructions:
 
 Webfaction API documentation here:
     http://docs.webfaction.com/xmlrpc-api/tutorial.html
+
+For TODO items, grep TODO in install.py
