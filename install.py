@@ -40,7 +40,22 @@ if SERVERIP is None:
     SERVERIP = server.list_websites(session_id)[0]["ip"]
     print "No SERVERIP given. Using %s" % SERVERIP
 
+# See if the website already exists.
+r = server.list_websites(session_id)
+to_delete = False
+for website in r:
+    if website["name"] == WEBSITENAME:
+        to_delete = True
+        break
+
+# If the website already exists, remove it before adding it
+if to_delete:
+    print "Website %s already exists. Removing..." % WEBSITENAME 
+    r = server.delete_website(session_id, WEBSITENAME)
+    print "server.delete_website: %s" % r
+
 # TODO: Add https here
 # TODO: Add subdomains www and stats here
 # TODO: Add path location of application here
-r = server.create_website(session_id, WEBSITENAME, SERVERIP, False, [DOMAINNAME], [[APPNAME, "/"],])
+print (session_id, WEBSITENAME, SERVERIP, False, [DOMAINNAME], [[APPNAME, "/"],])
+print server.create_website(session_id, WEBSITENAME, SERVERIP, False, [DOMAINNAME], [APPNAME, "/"])
