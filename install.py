@@ -10,25 +10,25 @@ session_id, account = server.login(USERNAME, PASSWORD)
 #{'username': 'test5', 'home': '/home2', 'id': 237} 
 
 
-def force_create(server, session_id, name, type, create_thing, delete_thing, list_thing, create_parameters):
+def force_create(server, session_id, name, type, create_thing, delete_thing, list_thing, create_parameters=[], namename="name", delete_extra_params=[]):
     """
     Force the creation of something using the webfaction API.
     """
     print tuple([repr(s) for s in [server, session_id, name, type, create_thing, delete_thing, list_thing, create_parameters]])
     print "force_create(server=%s, session_id=%s, name=%s, type=%s, create_thing=%s, delete_thing=%s, list_thing=%s, create_parameters=%s)" % tuple([repr(s) for s in [server, session_id, name, type, create_thing, delete_thing, list_thing, create_parameters]])
     # See if the something already exists.
-#    print server.__get_attr__(list_thing)(session_id)
     r = server.__getattr__(list_thing)(session_id)
     to_delete = False
     for i in r:
-        if i["name"] == name:
+#        print i
+        if i[namename] == name:
             to_delete = True
             break
     
     # If the something already exists, remove it before adding it
     if to_delete:
-        print "%s %s already exists. Removing..." % (type, APPNAME)
-        r = server.__getattr__(delete_thing)(session_id, APPNAME)
+        print "%s %s already exists. Removing..." % (type, name)
+        r = server.__getattr__(delete_thing)(*([session_id, name] + delete_extra_params))
         print "server.%s: %s" % (delete_thing, r)
     
     # Create the something
@@ -37,92 +37,31 @@ def force_create(server, session_id, name, type, create_thing, delete_thing, lis
     return r
 
 
-
-# Add the domain
-# TODO: See if the domain exists and remove it if it does?
-r = server.create_domain(session_id, DOMAINNAME)
-print "server.create_domain(%s): %s" % (DOMAINNAME, r)
-# TODO: Add www and stats subdomains
-#server.create_domain(session_id, DOMAINNAME, "www", "stats")
-
-
+r = force_create(server, session_id, DOMAINNAME, "domain", "create_domain", "delete_domain", "list_domains", namename="domain")
 
 r = force_create(server, session_id, APPNAME, "app", "create_app", "delete_app", "list_apps", ['mod_wsgi25_25', False, ''])
-PORT = r["port"]
-
-# See if the application already exists.
-r = server.list_apps(session_id)
-to_delete = False
-for app in r:
-    if app["name"] == APPNAME:
-        to_delete = True
-        break
-
-# If the application already exists, remove it before adding it
-if to_delete:
-    print "Application %s already exists. Removing..." % APPNAME
-    r = server.delete_app(session_id, APPNAME)
-    print "server.delete_app: %s" % r
-
-# Create an application: A mod_wsgi-2.5/Python 2.5 site with name APPNAME
-r = server.create_app(session_id, APPNAME, 'mod_wsgi25_25', False, '')
-print "server.create_app: %s" % r
 PORT = r["port"]
 
 if SERVERIP is None:
     SERVERIP = server.list_websites(session_id)[0]["ip"]
     print "No SERVERIP given. Using %s" % SERVERIP
-
-
-
-
-
-# See if the website already exists.
-r = server.list_websites(session_id)
-to_delete = False
-for website in r:
-    if website["name"] == WEBSITENAME:
-        to_delete = True
-        break
-
-# If the website already exists, remove it before adding it
-if to_delete:
-    print "Website %s already exists. Removing..." % WEBSITENAME 
-    r = server.delete_website(session_id, WEBSITENAME)
-    print "server.delete_website: %s" % r
-
 # TODO: Add https here
 # TODO: Add subdomains www and stats here
 # TODO: Add path location of application here
-r = server.create_website(session_id, WEBSITENAME, SERVERIP, False, [DOMAINNAME], [APPNAME, "/"])
-print "server.create_website: %s" % r
-
-
-
+r = force_create(server, session_id, WEBSITENAME, "website", "create_website", "delete_website", "list_websites",  [SERVERIP, False, [DOMAINNAME], [APPNAME, "/"]])
 
 if DATABASEPASSWORD is None:
     import randompassword
     DATABASEPASSWORD = randompassword.GenPasswd2()
     print "No DATABASEPASSWORD given. Using %s" % DATABASEPASSWORD
-
-# Create the database
-# TODO: Allow PostgreSQL
-r = server.create_db(session_id, DATABASENAME, "mysql", DATABASEPASSWORD)
-print "server.create_db: %s" % r
-
+r = force_create(server, session_id, DATABASENAME, "db", "create_db", "delete_db", "list_dbs", ["mysql", DATABASEPASSWORD], delete_extra_params=["mysql"])
 
 # TODO: Add a static media server
-
 
 if MAILBOXPASSWORD is None:
     import randompassword
     MAILBOXPASSWORD = randompassword.GenPasswd2()
     print "No MAILBOXPASSWORD given. Using %s" % MAILBOXPASSWORD
-
-# Configure mailbox
-for i in server.list_mailboxes(session_id):
-    print i
-r = server.create_mailbox(session_id, MAILBOXUSERNAME, enable_spam_protection=True, discard_spam=False, spam_redirect_folder='', use_manual_procmailrc=False, manual_procmailrc='')
-print "server.create_mailbox: %s" % r
+r = force_create(server, session_id, MAILBOXUSERNAME, "mailbox", "create_mailbox", "delete_mailbox", "list_mailboxes", [False, False, '', False, ''], namename='mailbox')
 r = server.change_mailbox_password(session_id, MAILBOXUSERNAME, MAILBOXPASSWORD)
 print "server.change_mailbox_password: %s" % r
