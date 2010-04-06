@@ -10,6 +10,33 @@ session_id, account = server.login(USERNAME, PASSWORD)
 #{'username': 'test5', 'home': '/home2', 'id': 237} 
 
 
+def force_create(server, session_id, name, type, create_thing, delete_thing, list_thing, create_parameters):
+    """
+    Force the creation of something using the webfaction API.
+    """
+    print tuple([repr(s) for s in [server, session_id, name, type, create_thing, delete_thing, list_thing, create_parameters]])
+    print "force_create(server=%s, session_id=%s, name=%s, type=%s, create_thing=%s, delete_thing=%s, list_thing=%s, create_parameters=%s)" % tuple([repr(s) for s in [server, session_id, name, type, create_thing, delete_thing, list_thing, create_parameters]])
+    # See if the something already exists.
+#    print server.__get_attr__(list_thing)(session_id)
+    r = server.__getattr__(list_thing)(session_id)
+    to_delete = False
+    for i in r:
+        if i["name"] == name:
+            to_delete = True
+            break
+    
+    # If the something already exists, remove it before adding it
+    if to_delete:
+        print "%s %s already exists. Removing..." % (type, APPNAME)
+        r = server.__getattr__(delete_thing)(session_id, APPNAME)
+        print "server.%s: %s" % (delete_thing, r)
+    
+    # Create the something
+    r = server.__getattr__(create_thing)(*([session_id, name] + create_parameters))
+    print "server.%s: %s" % (create_thing, r)
+    return r
+
+
 
 # Add the domain
 # TODO: See if the domain exists and remove it if it does?
@@ -20,6 +47,8 @@ print "server.create_domain(%s): %s" % (DOMAINNAME, r)
 
 
 
+r = force_create(server, session_id, APPNAME, "app", "create_app", "delete_app", "list_apps", ['mod_wsgi25_25', False, ''])
+PORT = r["port"]
 
 # See if the application already exists.
 r = server.list_apps(session_id)
