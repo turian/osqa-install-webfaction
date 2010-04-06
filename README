@@ -1,0 +1,6 @@
+
+Install git latest OSQA onto a webfaction shared host.
+
+Instructions:
+    * Copy globals.py.dist to globals.py, and edit it.
+    * Run ./install.py

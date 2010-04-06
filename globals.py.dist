@@ -1,0 +1,8 @@
+"""
+Global parameters for installation script.
+"""
+
+USERNAME = "username"
+PASSWORD = "password"
+NAME = "foo"
+DOMAINNAME = "foo.com"
