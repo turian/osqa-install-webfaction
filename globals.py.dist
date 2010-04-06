@@ -2,7 +2,16 @@
 Global parameters for installation script.
 """
 
-USERNAME = "username"
-PASSWORD = "password"
-NAME = "foo"
-DOMAINNAME = "foo.com"
+USERNAME = "username"       # Webfaction username
+PASSWORD = "password"       # Webfaction password
+APPNAME = "foo"             # Webfaction application name
+DOMAINNAME = "foo.com"      # Domain name for site
+
+# You probably don't need to modify these values:
+SERVERIP    = None          # Webfaction IP address of the server where
+                            # the entry resides, for creating the website.
+                            # If None, we will just use the first IP
+                            # address in your existing sites.
+                            # This is useful if you bought static IP
+                            # addresses.
+WEBSITENAME = APPNAME       # Webfaction website name

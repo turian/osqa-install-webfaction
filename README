@@ -1,6 +1,14 @@
 
 Install git latest OSQA onto a webfaction shared host.
 
+    by Joseph Turian
+
+Based upon the instructions here:
+    http://github.com/OSQA/osqa/blob/master/INSTALL.webfaction
+
 Instructions:
     * Copy globals.py.dist to globals.py, and edit it.
     * Run ./install.py
+
+Webfaction API documentation here:
+    http://docs.webfaction.com/xmlrpc-api/tutorial.html
