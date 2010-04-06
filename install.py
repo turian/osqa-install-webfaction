@@ -9,6 +9,9 @@ session_id, account = server.login(USERNAME, PASSWORD)
 #print repr(account)
 #{'username': 'test5', 'home': '/home2', 'id': 237} 
 
+#for i in server.list_emails(session_id):
+#    print i
+
 
 def force_create(server, session_id, name, type, create_thing, delete_thing, list_thing, create_parameters=[], namename="name", delete_extra_params=[]):
     """
@@ -65,3 +68,7 @@ if MAILBOXPASSWORD is None:
 r = force_create(server, session_id, MAILBOXUSERNAME, "mailbox", "create_mailbox", "delete_mailbox", "list_mailboxes", [False, False, '', False, ''], namename='mailbox')
 r = server.change_mailbox_password(session_id, MAILBOXUSERNAME, MAILBOXPASSWORD)
 print "server.change_mailbox_password: %s" % r
+
+
+TARGETS = '%s,%s' % (MAILBOXUSERNAME, YOUREMAIL)
+r = force_create(server, session_id, EMAILADDRESS, "email", "create_email", "delete_email", "list_emails", [TARGETS], namename='email_address')

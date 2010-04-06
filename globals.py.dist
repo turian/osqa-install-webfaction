@@ -6,6 +6,7 @@ USERNAME = "username"       # Webfaction username
 PASSWORD = "password"       # Webfaction password
 APPNAME = "foo"             # Webfaction application name
 DOMAINNAME = "foo.com"      # Domain name for site
+YOUREMAIL = "you@gmail.com" # Forward emails to this address
 
 # You probably don't need to modify these values:
 SERVERIP    = None          # Webfaction IP address of the server where
@@ -21,3 +22,4 @@ DATABASEPASSWORD = None     # Webfaction database password. If None,
 MAILBOXUSERNAME = APPNAME   # Webfaction mailbox username
 MAILBOXPASSWORD = None      # Webfaction mailbox password. If None,
                             # pick a random password.
+EMAILADDRESS = "admin@%s" % DOMAINNAME  # Email address for the admin
