@@ -10,6 +10,29 @@ Instructions:
     * Copy globals.py.dist to globals.py, and edit it.
     * Run ./install.py
 
+Webfaction setup:
+    * Put the following in ~/.bashrc, then 'source ~/.bashrc':
+export UTILS="$HOME/utils/"
+export PATH="$PATH:$UTILS/bin"
+export INCLUDE="$UTILS/include/:$INCLUDE"
+export LD_LIBRARY_PATH="$UTILS/lib/:$LD_LIBRARY_PATH"
+export PYTHONPATH="$UTILS/lib/python2.4/site-packages/:$PYTHONPATH"
+alias easy_install="easy_install --prefix $UTILS"
+    * Make a src directory
+mkdir -p $UTILS/src/
+    * Install git
+cd $UTILS/src/
+wget http://kernel.org/pub/software/scm/git/git-1.7.0.4.tar.bz2
+tar jxvf git-1.7.0.4.tar.bz2
+cd git-1.7.0.4
+make prefix=$UTILS all
+make prefix=$UTILS install
+    * Get source:
+cd $UTILS/src/
+git clone git://github.com/turian/osqa-install-webfaction.git
+cd cd osqa-install-webfaction/
+    * Run code, based upon instructions above.
+
 Webfaction API documentation here:
     http://docs.webfaction.com/xmlrpc-api/tutorial.html
 
