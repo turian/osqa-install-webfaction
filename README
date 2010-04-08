@@ -8,7 +8,7 @@ Based upon the instructions here:
 
 Instructions:
     * Copy globals.py.dist to globals.py, and edit it.
-    * Run ./install.py
+    * Run ./install-webfaction-cpanel.py
 
 Webfaction setup:
     * Put the following in ~/.bashrc, then 'source ~/.bashrc':
