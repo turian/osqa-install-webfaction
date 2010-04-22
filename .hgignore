@@ -1,2 +1,4 @@
 syntax: glob
 globals.py
+*.pyc
+moreglobals.py

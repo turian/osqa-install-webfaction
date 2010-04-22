@@ -2,6 +2,9 @@
 
 from globals import *
 
+# Write new globals here
+moreglobals = open("moreglobals.py", "wt")
+
 import xmlrpclib 
 server = xmlrpclib.ServerProxy('https://api.webfaction.com/') 
 session_id, account = server.login(USERNAME, PASSWORD)
@@ -48,6 +51,7 @@ else:
 
 r = force_create(server, session_id, APPNAME, "app", "create_app", "delete_app", "list_apps", ['mod_wsgi25_25', False, ''])
 PORT = r["port"]
+moreglobals.write("%s = '%s'\n" % ("PORT", PORT))
 
 if SERVERIP is None:
     SERVERIP = server.list_websites(session_id)[0]["ip"]
@@ -60,6 +64,7 @@ r = force_create(server, session_id, WEBSITENAME, "website", "create_website", "
 if DATABASEPASSWORD is None:
     import randompassword
     DATABASEPASSWORD = randompassword.GenPasswd2()
+    moreglobals.write("%s = '%s'\n" % ("DATABASEPASSWORD", DATABASEPASSWORD))
     print "No DATABASEPASSWORD given. Using %s" % DATABASEPASSWORD
 r = force_create(server, session_id, DATABASENAME, "db", "create_db", "delete_db", "list_dbs", ["mysql", DATABASEPASSWORD], delete_extra_params=["mysql"])
 
@@ -68,6 +73,7 @@ r = force_create(server, session_id, DATABASENAME, "db", "create_db", "delete_db
 if MAILBOXPASSWORD is None:
     import randompassword
     MAILBOXPASSWORD = randompassword.GenPasswd2()
+    moreglobals.write("%s = '%s'\n" % ("MAILBOXPASSWORD", MAILBOXPASSWORD))
     print "No MAILBOXPASSWORD given. Using %s" % MAILBOXPASSWORD
 r = force_create(server, session_id, MAILBOXUSERNAME, "mailbox", "create_mailbox", "delete_mailbox", "list_mailboxes", [False, False, '', False, ''], namename='mailbox')
 r = server.change_mailbox_password(session_id, MAILBOXUSERNAME, MAILBOXPASSWORD)
