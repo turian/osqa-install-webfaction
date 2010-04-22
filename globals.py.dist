@@ -6,6 +6,7 @@ USERNAME = "username"       # Webfaction username
 PASSWORD = "password"       # Webfaction password
 APPNAME = "foo"             # Webfaction application name
 DOMAINNAME = "foo.com"      # Domain name for site
+SUBDOMAINNAME = None	    # Subdomain to use, or None if you don't want one.
 YOUREMAIL = "you@gmail.com" # Forward emails to this address
 
 # You probably don't need to modify these values:
@@ -23,3 +24,8 @@ MAILBOXUSERNAME = APPNAME   # Webfaction mailbox username
 MAILBOXPASSWORD = None      # Webfaction mailbox password. If None,
                             # pick a random password.
 EMAILADDRESS = "admin@%s" % DOMAINNAME  # Email address for the admin
+
+if SUBDOMAINNAME is None:
+    FULLDOMAINNAME = DOMAINNAME
+else:
+    FULLDOMAINNAME = "%s.%s" % (SUBDOMAINNAME, DOMAINNAME)

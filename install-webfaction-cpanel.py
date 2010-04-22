@@ -13,9 +13,10 @@ session_id, account = server.login(USERNAME, PASSWORD)
 #    print i
 
 
-def force_create(server, session_id, name, type, create_thing, delete_thing, list_thing, create_parameters=[], namename="name", delete_extra_params=[]):
+def force_create(server, session_id, name, type, create_thing, delete_thing, list_thing, create_parameters=[], namename="name", delete_extra_params=[], overwrite=True):
     """
     Force the creation of something using the webfaction API.
+    overwrite determines whether to delete the entity if it exists.
     """
     print tuple([repr(s) for s in [server, session_id, name, type, create_thing, delete_thing, list_thing, create_parameters]])
     print "force_create(server=%s, session_id=%s, name=%s, type=%s, create_thing=%s, delete_thing=%s, list_thing=%s, create_parameters=%s)" % tuple([repr(s) for s in [server, session_id, name, type, create_thing, delete_thing, list_thing, create_parameters]])
@@ -28,9 +29,10 @@ def force_create(server, session_id, name, type, create_thing, delete_thing, lis
             to_delete = True
             break
     
-    # If the something already exists, remove it before adding it
-    if to_delete:
+    # If the something already exists and we should overwrite it, remove it before adding it
+    if to_delete and overwrite:
         print "%s %s already exists. Removing..." % (type, name)
+#        print delete_thing, ([session_id, name] + delete_extra_params)
         r = server.__getattr__(delete_thing)(*([session_id, name] + delete_extra_params))
         print "server.%s: %s" % (delete_thing, r)
     
@@ -39,8 +41,10 @@ def force_create(server, session_id, name, type, create_thing, delete_thing, lis
     print "server.%s: %s" % (create_thing, r)
     return r
 
-
-r = force_create(server, session_id, DOMAINNAME, "domain", "create_domain", "delete_domain", "list_domains", namename="domain")
+if SUBDOMAINNAME is None:
+    r = force_create(server, session_id, DOMAINNAME, "domain", "create_domain", "delete_domain", "list_domains", namename="domain", overwrite=False)
+else:
+    r = force_create(server, session_id, DOMAINNAME, "domain", "create_domain", "delete_domain", "list_domains", [SUBDOMAINNAME], namename="domain", overwrite=False)
 
 r = force_create(server, session_id, APPNAME, "app", "create_app", "delete_app", "list_apps", ['mod_wsgi25_25', False, ''])
 PORT = r["port"]
@@ -51,7 +55,7 @@ if SERVERIP is None:
 # TODO: Add https here
 # TODO: Add subdomains www and stats here
 # TODO: Add path location of application here
-r = force_create(server, session_id, WEBSITENAME, "website", "create_website", "delete_website", "list_websites",  [SERVERIP, False, [DOMAINNAME], [APPNAME, "/"]])
+r = force_create(server, session_id, WEBSITENAME, "website", "create_website", "delete_website", "list_websites",  [SERVERIP, False, [FULLDOMAINNAME], [APPNAME, "/"]])
 
 if DATABASEPASSWORD is None:
     import randompassword
