@@ -17,7 +17,11 @@ Instructions:
         ./getsource.sh
 
     * Configure settings_local.py
-        ./makesettings.py
+        ./modifysettings.py
+
+    * Configure cron jobs:
+        ./modifycron.py
+    Make sure to add the output to your crontab!
 
 Webfaction setup:
     * Put the following in ~/.bashrc, then 'source ~/.bashrc':
