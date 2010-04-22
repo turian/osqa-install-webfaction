@@ -37,7 +37,8 @@ Instructions:
         ./startapache.sh
 
     * Copy the settings to the WEBAPPDIR:
-        cp globals.py moreglobals.py $OSQA_WEBAPPDIR ; chmod go-rw $OSQA_WEBAPPDIR/globals.py $OSQA_WEBAPPDIR/moreglobals.py
+        chmod go-rwx globals.py* moreglobals.py*
+        cp globals.py moreglobals.py $OSQA_WEBAPPDIR ; chmod go-rwx $OSQA_WEBAPPDIR/globals.py $OSQA_WEBAPPDIR/moreglobals.py
 
 Webfaction setup:
     * Put the following in ~/.bashrc, then 'source ~/.bashrc':
