@@ -13,16 +13,8 @@ Instructions:
     * Get OSQA env variables:
         eval $(./makeenv.py )
 
-        cd ~/utils/src/
-        svn co http://svn.osqa.net/svnroot/osqa/trunk osqa
-        cd osqa
-
-        # We need python2.5 to be compatible with WSGI
-        python2.5 ~/utils/bin/pip install -E ~/envs/osqa -r osqa-requirements.txt
-        source ~/envs/osqa/bin/activate
-
-        # [Optional] If you want a MySQL database
-        easy_install-2.5 --prefix ~/envs/osqa/ mysql-python
+    * Get the OSQA source + make a virtualenv:
+        ./getsource.sh
 
 Webfaction setup:
     * Put the following in ~/.bashrc, then 'source ~/.bashrc':
