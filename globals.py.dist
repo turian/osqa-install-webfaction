@@ -24,6 +24,8 @@ MAILBOXUSERNAME = APPNAME   # Webfaction mailbox username
 MAILBOXPASSWORD = None      # Webfaction mailbox password. If None,
                             # pick a random password.
 EMAILADDRESS = "admin@%s" % DOMAINNAME  # Email address for the admin
+ADMINUSERNAME = "admin"     # Username for the admin account
+ADMINPASSWORD = None        # Password for the admin account
 
 if SUBDOMAINNAME is None:
     FULLDOMAINNAME = DOMAINNAME

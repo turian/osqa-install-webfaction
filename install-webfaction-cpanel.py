@@ -79,6 +79,12 @@ r = force_create(server, session_id, MAILBOXUSERNAME, "mailbox", "create_mailbox
 r = server.change_mailbox_password(session_id, MAILBOXUSERNAME, MAILBOXPASSWORD)
 print "server.change_mailbox_password: %s" % r
 
+if ADMINPASSWORD is None:
+    import randompassword
+    ADMINPASSWORD = randompassword.GenPasswd2()
+    moreglobals.write("%s = '%s'\n" % ("ADMINPASSWORD", ADMINPASSWORD))
+    print "No ADMINPASSWORD given. Using %s" % ADMINPASSWORD
+
 
 TARGETS = '%s,%s' % (MAILBOXUSERNAME, YOUREMAIL)
 r = force_create(server, session_id, EMAILADDRESS, "email", "create_email", "delete_email", "list_emails", [TARGETS], namename='email_address')

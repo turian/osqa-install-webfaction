@@ -19,8 +19,8 @@ python manage.py %s >> $PROJECT_ROOT/log/cron_mail.log 2>&1
 
 names = {
 "send_email_alerts": "1 0,12 * * *",    # Twice a day
-"multi_award_badges": "11 0,12 * * *",
-"once_award_badges": "21 0,12 * * *",
+"multi_award_badges": "4,19,34,49 * * * *", # Four times an hour
+"once_award_badges": "14,29,44,59 * * * *", # Four times an hour
 }
 
 outtxt = ""
@@ -28,7 +28,7 @@ outtxt = ""
 for name in names:
     cronfilename = os.path.join(PROJECTDIR, "cron/%s" % name)
     print >> sys.stderr, "Writing to %s" % cronfilename
-    open(cronfilename, "wt").write(crontxt % (PROJECTDIR, ENVDIR, "send_emails"))
+    open(cronfilename, "wt").write(crontxt % (ENVDIR, PROJECTDIR, "send_emails"))
     outtxt += "%s\t\t%s\n" % (names[name], cronfilename)
 
 print >> sys.stderr, "Please run 'crontab -e' and add the following lines"
