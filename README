@@ -36,6 +36,7 @@ Instructions:
 
     * Start apache server:
         ./startapache.sh
+    You might need to run this twice.
 
     * Copy the settings to the WEBAPPDIR:
         chmod go-rwx globals.py* moreglobals.py*
