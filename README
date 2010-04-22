@@ -30,6 +30,9 @@ Instructions:
     * Update the httpd.conf:
         ./modifyhttpdconf.py
 
+    * Update the wsgi file:
+        ./modifywsgi.py
+
 Webfaction setup:
     * Put the following in ~/.bashrc, then 'source ~/.bashrc':
 export UTILS="$HOME/utils/"
