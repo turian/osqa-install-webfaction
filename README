@@ -27,6 +27,9 @@ Instructions:
         ./createdb.sh
     Inputting the data printed at the top of the output.
 
+    * Update the httpd.conf:
+        ./modifyhttpdconf.py
+
 Webfaction setup:
     * Put the following in ~/.bashrc, then 'source ~/.bashrc':
 export UTILS="$HOME/utils/"

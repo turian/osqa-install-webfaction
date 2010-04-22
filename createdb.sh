@@ -8,4 +8,9 @@ print ADMINUSERNAME
 print EMAILADDRESS
 print ADMINPASSWORD
 print ADMINPASSWORD
-#python
+
+python manage.py syncdb
+
+# The following are just to test the database out
+./cron/multi_award_badges
+./cron/once_award_badges
