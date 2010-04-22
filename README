@@ -33,6 +33,12 @@ Instructions:
     * Update the wsgi file:
         ./modifywsgi.py
 
+    * Start apache server:
+        ./startapache.sh
+
+    * Copy the settings to the WEBAPPDIR:
+        cp globals.py moreglobals.py $OSQA_WEBAPPDIR ; chmod go-rw $OSQA_WEBAPPDIR/globals.py $OSQA_WEBAPPDIR/moreglobals.py
+
 Webfaction setup:
     * Put the following in ~/.bashrc, then 'source ~/.bashrc':
 export UTILS="$HOME/utils/"
@@ -64,5 +70,9 @@ Webfaction API documentation here:
 
 For TODO items, grep TODO in install.py
 Also:
+    * Toggle DEBUG mode
     * Want PostgreSQL, not MySQL
     * Want SERVE_MEDIA=False, and an Nginx media server
+    * You should log in to the admin interface (http://DOMAIN.com/admin/),
+    and go to "Sites > Sites", and change the domain name that is used in
+    all emails.

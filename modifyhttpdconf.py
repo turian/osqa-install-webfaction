@@ -19,7 +19,7 @@ LoadModule wsgi_module modules/mod_wsgi.so
 
 KeepAlive Off
 Listen %s
-LogFormat "%%{X-Forwarded-For}i %%l %%u %%t \"%%r\" %%>s %%b \"%%{Referer}i\" \"%%{User-Agent}i\"" combined
+LogFormat "%%{X-Forwarded-For}i %%l %%u %%t \\"%%r\\" %%>s %%b \\"%%{Referer}i\\" \\"%%{User-Agent}i\\"" combined
 CustomLog %s combined
 ErrorLog %s
 ServerLimit 2
@@ -43,7 +43,7 @@ SetHandler none
 #otherwise django will be crunching images through itself wasting time
 Alias /content/ %s
 Alias /forum/admin/media/ %s
-#AliasMatch /([^/]*\.css) /home/USERNAME/webapps/osqa_server/projects/MYOSQA/templates/content/style/$1
+#AliasMatch /([^/]*\\.css) /home/USERNAME/webapps/osqa_server/projects/MYOSQA/templates/content/style/$1
 <Directory "%s">
 #    Order deny,allow
 #    Allow from all

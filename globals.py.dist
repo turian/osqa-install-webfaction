@@ -33,5 +33,6 @@ else:
     FULLDOMAINNAME = "%s.%s" % (SUBDOMAINNAME, DOMAINNAME)
 
 import os, os.path
-PROJECTDIR = os.path.join(os.environ["HOME"], "webapps/%s/projects/osqa/" % APPNAME)
-ENVDIR = os.path.join(os.environ["HOME"], "webapps/%s/env/" % APPNAME)
+WEBAPPDIR = os.path.join(os.environ["HOME"], "webapps/%s/" % APPNAME)
+PROJECTDIR = os.path.join(WEBAPPDIR, "projects/osqa/")
+ENVDIR = os.path.join(WEBAPPDIR, "env/")
