@@ -10,6 +10,20 @@ Instructions:
     * Copy globals.py.dist to globals.py, and edit it.
     * Run ./install-webfaction-cpanel.py
 
+    * Get OSQA env variables:
+        eval $(./makeenv.py )
+
+        cd ~/utils/src/
+        svn co http://svn.osqa.net/svnroot/osqa/trunk osqa
+        cd osqa
+
+        # We need python2.5 to be compatible with WSGI
+        python2.5 ~/utils/bin/pip install -E ~/envs/osqa -r osqa-requirements.txt
+        source ~/envs/osqa/bin/activate
+
+        # [Optional] If you want a MySQL database
+        easy_install-2.5 --prefix ~/envs/osqa/ mysql-python
+
 Webfaction setup:
     * Put the following in ~/.bashrc, then 'source ~/.bashrc':
 export UTILS="$HOME/utils/"
@@ -27,6 +41,9 @@ tar jxvf git-1.7.0.4.tar.bz2
 cd git-1.7.0.4
 make prefix=$UTILS all
 make prefix=$UTILS install
+    * Install pip and virtualenv:
+        easy_install --prefix=~/utils/ pip
+        easy_install --prefix=~/utils/ virtualenv
     * Get source:
 cd $UTILS/src/
 git clone git://github.com/turian/osqa-install-webfaction.git
