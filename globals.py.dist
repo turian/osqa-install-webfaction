@@ -36,3 +36,8 @@ import os, os.path
 WEBAPPDIR = os.path.join(os.environ["HOME"], "webapps/%s/" % APPNAME)
 PROJECTDIR = os.path.join(WEBAPPDIR, "projects/osqa/")
 ENVDIR = os.path.join(WEBAPPDIR, "env/")
+
+try:
+    from moreglobals import *
+except:
+    pass

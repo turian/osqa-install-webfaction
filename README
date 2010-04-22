@@ -8,6 +8,7 @@ Based upon the instructions here:
 
 Instructions:
     * Copy globals.py.dist to globals.py, and edit it.
+
     * Run ./install-webfaction-cpanel.py
 
     * Get OSQA env variables:

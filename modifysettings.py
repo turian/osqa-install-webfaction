@@ -27,8 +27,8 @@ for key in values:
     regex = "\\b%s\\b\\s*=\\s*.*" % key
     newstr = "%s = '%s'" % (key, values[key])
     if not re.search(regex, settings_txt):
-        print >> sys.stderr, "Could not find setting for %s, appending"
-        settings_txt += "\n%s" % newstr
+        print >> sys.stderr, "Could not find setting for %s, prepending" % key
+        settings_txt = "%s\n%s" % (newstr, settings_txt)
     else:
         settings_txt = re.sub(regex, newstr, settings_txt)
 print >> sys.stderr, "Writing to %s" % os.path.join(PROJECTDIR, "settings_local.py")
