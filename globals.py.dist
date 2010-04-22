@@ -35,7 +35,8 @@ else:
 import os, os.path
 WEBAPPDIR = os.path.join(os.environ["HOME"], "webapps/%s/" % APPNAME)
 PROJECTDIR = os.path.join(WEBAPPDIR, "projects/osqa/")
-ENVDIR = os.path.join(WEBAPPDIR, "env/")
+
+ENVDIR = os.path.join(os.environ["HOME"], "envs/osqa/")	# Note: All OSQA sites should share one env dir, otherwise we need one Apache instance per env.
 
 try:
     from moreglobals import *

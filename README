@@ -71,6 +71,9 @@ cd cd osqa-install-webfaction/
 Webfaction API documentation here:
     http://docs.webfaction.com/xmlrpc-api/tutorial.html
 
+NOTES:
+    * All OSQA sites should share one env dir (ENVDIR).
+
 For TODO items, grep TODO in install.py
 Also:
     * Toggle DEBUG mode
