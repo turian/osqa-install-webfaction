@@ -29,3 +29,7 @@ if SUBDOMAINNAME is None:
     FULLDOMAINNAME = DOMAINNAME
 else:
     FULLDOMAINNAME = "%s.%s" % (SUBDOMAINNAME, DOMAINNAME)
+
+import os, os.path
+PROJECTDIR = os.path.join(os.environ["HOME"], "webapps/%s/projects/osqa/" % APPNAME)
+ENVDIR = os.path.join(os.environ["HOME"], "webapps/%s/env/" % APPNAME)

@@ -46,3 +46,6 @@ Webfaction API documentation here:
     http://docs.webfaction.com/xmlrpc-api/tutorial.html
 
 For TODO items, grep TODO in install.py
+Also:
+    * Want PostgreSQL, not MySQL
+    * Want SERVE_MEDIA=False, and an Nginx media server
