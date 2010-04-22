@@ -2,6 +2,7 @@
 
 from globals import *
 import os.path
+import sys
 
 settings_txt = open(os.path.join(PROJECTDIR, "settings_local.py.dist")).read()
 #print settings_txt
@@ -23,5 +24,12 @@ values = {
 
 import re
 for key in values:
-    settings_txt = re.sub("\\b%s\\b\\s*=\\s*.*" % key, "%s = '%s'" % (key, values[key]), settings_txt)
-print settings_txt
+    regex = "\\b%s\\b\\s*=\\s*.*" % key
+    newstr = "%s = '%s'" % (key, values[key])
+    if not re.search(regex, settings_txt):
+        print >> sys.stderr, "Could not find setting for %s, appending"
+        settings_txt += "\n%s" % newstr
+    else:
+        settings_txt = re.sub(regex, newstr, settings_txt)
+print >> sys.stderr, "Writing to %s" % os.path.join(PROJECTDIR, "settings_local.py")
+open(os.path.join(PROJECTDIR, "settings_local.py"), "wt").write(settings_txt)

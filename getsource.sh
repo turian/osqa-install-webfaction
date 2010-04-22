@@ -6,7 +6,7 @@ cd $OSQA_PROJECTDIR
 
 # We need python2.5 to be compatible with WSGI
 python2.5 ~/utils/bin/pip install -E $OSQA_ENVDIR -r osqa-requirements.txt
-source $OSQA_ENVDIR
+source $OSQA_ENVDIR/bin/activate
 
 # [Optional] If you want a MySQL database
 easy_install-2.5 --prefix $OSQA_ENVDIR mysql-python

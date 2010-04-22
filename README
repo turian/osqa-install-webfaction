@@ -16,6 +16,9 @@ Instructions:
     * Get the OSQA source + make a virtualenv:
         ./getsource.sh
 
+    * Configure settings_local.py
+        ./makesettings.py
+
 Webfaction setup:
     * Put the following in ~/.bashrc, then 'source ~/.bashrc':
 export UTILS="$HOME/utils/"
