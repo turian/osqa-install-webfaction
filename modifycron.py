@@ -29,8 +29,16 @@ for name in names:
     cronfilename = os.path.join(PROJECTDIR, "cron/%s" % name)
     print >> sys.stderr, "Writing to %s" % cronfilename
     open(cronfilename, "wt").write(crontxt % (ENVDIR, PROJECTDIR, "send_emails"))
-    outtxt += "%s\t\t%s\n" % (names[name], cronfilename)
+#    outtxt += "%s\t\t%s\n" % (names[name], cronfilename)
+    outtxt += "echo '%s\t\t%s'; " % (names[name], cronfilename)
 
-print >> sys.stderr, "Please run 'crontab -e' and add the following lines"
-print
-print outtxt
+#print >> sys.stderr, "Please run 'crontab -e' and add the following lines"
+
+# Backup the crontab
+cmd = "crontab -l > crontab.backup.`date +'%F-%T'`"
+print cmd
+os.system(cmd)
+
+cmd = "(crontab -l ; echo; %s) | crontab -" % outtxt
+print cmd
+os.system(cmd)

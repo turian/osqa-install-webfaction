@@ -31,11 +31,10 @@ Instructions for each OSQA:
 
     * Configure cron jobs:
         ./modifycron.py
-    Make sure to add the output to your crontab!
 
     * Create the database:
         ./createdb.sh
-    Inputting the data printed at the top of the output.
+    Copying in the appropriate lines that are output at the top of the program
 
     * Update the httpd.conf:
         ./modifyhttpdconf.py
@@ -50,6 +49,11 @@ Instructions for each OSQA:
     * Copy the settings to the WEBAPPDIR:
         chmod go-rwx globals.py* moreglobals.py*
         cp globals.py moreglobals.py $OSQA_WEBAPPDIR ; chmod go-rwx $OSQA_WEBAPPDIR/globals.py $OSQA_WEBAPPDIR/moreglobals.py
+
+    ==========
+    * Combined version of above, after you have created globals.py:
+        ./batch.sh 2>&1 | tee batch.log
+#        ./install-webfaction-cpanel.py && eval $(./makeenv.py ) && ./getsource.sh && ./modifysettings.py && ./modifycron.py && ./createdb.sh && ./modifyhttpdconf.py && ./modifywsgi.py && ./startapache.sh ; chmod go-rwx globals.py* moreglobals.py* ; cp globals.py moreglobals.py $OSQA_WEBAPPDIR ; chmod go-rwx $OSQA_WEBAPPDIR/globals.py $OSQA_WEBAPPDIR/moreglobals.py
 
 Webfaction setup:
     * Put the following in ~/.bashrc, then 'source ~/.bashrc':
@@ -85,6 +89,8 @@ NOTES:
 
 For TODO items, grep TODO in install.py
 Also:
+    * modifycrontab.py doesn't check if the lines are already in the
+    crontab, so it might add duplicates if you run it twice!
     * Toggle DEBUG mode
     * Want PostgreSQL, not MySQL
     * Want SERVE_MEDIA=False, and an Nginx media server
