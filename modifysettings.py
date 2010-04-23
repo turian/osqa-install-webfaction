@@ -7,8 +7,13 @@ import sys
 settings_txt = open(os.path.join(PROJECTDIR, "settings_local.py.dist")).read()
 #print settings_txt
 
+if DATABASETYPE == 'postgresql':
+    THISDATABASETYPE = 'postgresql_psycopg2'
+else:
+    THISDATABASETYPE = DATABASETYPE
+
 values = {
-'DATABASE_ENGINE': 'mysql',
+'DATABASE_ENGINE': THISDATABASETYPE,
 'DATABASE_NAME': DATABASENAME,
 'DATABASE_USER': DATABASENAME,
 'DATABASE_PASSWORD': DATABASEPASSWORD,

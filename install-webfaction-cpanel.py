@@ -74,7 +74,8 @@ if DATABASEPASSWORD is None:
     DATABASEPASSWORD = randompassword.GenPasswd2()
     moreglobals.write("%s = '%s'\n" % ("DATABASEPASSWORD", DATABASEPASSWORD))
     print >> sys.stderr, "No DATABASEPASSWORD given. Using %s" % DATABASEPASSWORD
-r = force_create(server, session_id, DATABASENAME, "db", "create_db", "delete_db", "list_dbs", ["mysql", DATABASEPASSWORD], delete_extra_params=["mysql"])
+assert DATABASETYPE in ["mysql", "postgresql"]
+r = force_create(server, session_id, DATABASENAME, "db", "create_db", "delete_db", "list_dbs", [DATABASETYPE, DATABASEPASSWORD], delete_extra_params=[DATABASETYPE])
 
 # TODO: Add a static media server
 
@@ -88,13 +89,6 @@ try_remove(server, session_id, EMAILADDRESS, "email", "delete_email", "list_emai
 r = force_create(server, session_id, MAILBOXUSERNAME, "mailbox", "create_mailbox", "delete_mailbox", "list_mailboxes", [False, False, '', False, ''], namename='mailbox')
 r = server.change_mailbox_password(session_id, MAILBOXUSERNAME, MAILBOXPASSWORD)
 print >> sys.stderr, "server.change_mailbox_password: %s" % r
-
-if ADMINPASSWORD is None:
-    import randompassword
-    ADMINPASSWORD = randompassword.GenPasswd2()
-    moreglobals.write("%s = '%s'\n" % ("ADMINPASSWORD", ADMINPASSWORD))
-    print >> sys.stderr, "No ADMINPASSWORD given. Using %s" % ADMINPASSWORD
-
 
 TARGETS = '%s,%s' % (MAILBOXUSERNAME, YOUREMAIL)
 r = force_create(server, session_id, EMAILADDRESS, "email", "create_email", "delete_email", "list_emails", [TARGETS], namename='email_address')
