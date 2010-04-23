@@ -90,6 +90,7 @@ NOTES:
 
 For TODO items, grep TODO in install.py
 Also:
+    * Install database backup.
     * modifycrontab.py doesn't check if the lines are already in the
     crontab, so it might add duplicates if you run it twice!
     * Toggle DEBUG mode

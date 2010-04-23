@@ -1,4 +1,6 @@
 syntax: glob
+batch.log
+crontab.backup.*
 globals.py
-*.pyc
 moreglobals.py
+*.pyc
