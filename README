@@ -18,6 +18,8 @@ Instructions, only once:
 Instructions for each OSQA:
     * Copy globals.py.dist to globals.py, and edit it.
 
+    * rm moreglobals.py*
+
     * Run ./install-webfaction-cpanel.py
 
     * Get OSQA env variables:
@@ -53,7 +55,6 @@ Instructions for each OSQA:
     ==========
     * Combined version of above, after you have created globals.py:
         ./batch.sh 2>&1 | tee batch.log
-#        ./install-webfaction-cpanel.py && eval $(./makeenv.py ) && ./getsource.sh && ./modifysettings.py && ./modifycron.py && ./createdb.sh && ./modifyhttpdconf.py && ./modifywsgi.py && ./startapache.sh ; chmod go-rwx globals.py* moreglobals.py* ; cp globals.py moreglobals.py $OSQA_WEBAPPDIR ; chmod go-rwx $OSQA_WEBAPPDIR/globals.py $OSQA_WEBAPPDIR/moreglobals.py
 
 Webfaction setup:
     * Put the following in ~/.bashrc, then 'source ~/.bashrc':
