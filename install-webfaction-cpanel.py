@@ -49,7 +49,7 @@ if SUBDOMAINNAME is None:
 else:
     r = force_create(server, session_id, DOMAINNAME, "domain", "create_domain", "delete_domain", "list_domains", [SUBDOMAINNAME], namename="domain", overwrite=False)
 
-r = force_create(server, session_id, APPNAME, "app", "create_app", "delete_app", "list_apps", ['mod_wsgi25_25', False, ''])
+r = force_create(server, session_id, APPNAME, "app", "create_app", "delete_app", "list_apps", ['custom_app_with_port', False, ''])
 PORT = r["port"]
 moreglobals.write("%s = '%s'\n" % ("PORT", PORT))
 

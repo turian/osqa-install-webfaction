@@ -6,7 +6,16 @@ Install git latest OSQA onto a webfaction shared host.
 Based upon the instructions here:
     http://github.com/OSQA/osqa/blob/master/INSTALL.webfaction
 
-Instructions:
+Instructions, only once:
+    * Set up Webfaction, as described at the bottom of this file.
+    * Create a mod_wsgi application to host all your OSQA sites:
+            https://panel.webfaction.com/app_/create
+        Name: allosqa       [globals.APPALLOSQA]
+        Type: mod_wsgi 2.5/Python 2.5
+    Disregard the assigned port, each OSQA will have be a custom app with its own port.
+    TODO: Automate this step
+
+Instructions for each OSQA:
     * Copy globals.py.dist to globals.py, and edit it.
 
     * Run ./install-webfaction-cpanel.py

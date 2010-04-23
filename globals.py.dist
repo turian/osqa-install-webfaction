@@ -36,6 +36,9 @@ import os, os.path
 WEBAPPDIR = os.path.join(os.environ["HOME"], "webapps/%s/" % APPNAME)
 PROJECTDIR = os.path.join(WEBAPPDIR, "projects/osqa/")
 
+APPALLOSQA = "allosqa"      # The mod_wsgi 2.5/Python 2.5 application name that serves all the OSQA sites.
+WEBALLOSQADIR = os.path.join(os.environ["HOME"], "webapps/%s/" % APPALLOSQA)
+
 ENVDIR = os.path.join(os.environ["HOME"], "envs/osqa/")	# Note: All OSQA sites should share one env dir, otherwise we need one Apache instance per env.
 
 try:
