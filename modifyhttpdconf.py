@@ -25,6 +25,16 @@ LoadModule alias_module modules/mod_alias.so
 WSGIDaemonProcess osqaWSGI user=%s group=%s threads=25 python-path=%s
 WSGIProcessGroup osqaWSGI
 
+#ErrorLog "logs/MYOSQA_2009_05_06.log"
+SetHandler none
+#Alias /site_media /home/USERNAME/webapps/static/MYOSQA/site_media
+
+#AliasMatch /([^/]*\\.css) /home/USERNAME/webapps/osqa_server/projects/MYOSQA/templates/content/style/$1
+#<Directory "%s">
+#    Order deny,allow
+#    Allow from all
+#</Directory>
+
 Listen %s
 NameVirtualHost 127.0.0.1:%s
 
@@ -35,26 +45,16 @@ NameVirtualHost 127.0.0.1:%s
     CustomLog %s combined
     ErrorLog %s
     WSGIScriptAlias / %s
+    #force all content to be served as static files
+    #otherwise django will be crunching images through itself wasting time
+    Alias /content/ %s
+    Alias /forum/admin/media/ %s
 </VirtualHost>
-
-#ErrorLog "logs/MYOSQA_2009_05_06.log"
-SetHandler none
-#Alias /site_media /home/USERNAME/webapps/static/MYOSQA/site_media
-
-#force all content to be served as static files
-#otherwise django will be crunching images through itself wasting time
-Alias /content/ %s
-Alias /forum/admin/media/ %s
-#AliasMatch /([^/]*\\.css) /home/USERNAME/webapps/osqa_server/projects/MYOSQA/templates/content/style/$1
-<Directory "%s">
-#    Order deny,allow
-#    Allow from all
-</Directory>
 '''
 
 conffilename = os.path.join(os.environ["HOME"], "webapps/%s/apache2/conf/httpd.conf" % APPALLOSQA)
 print >> sys.stderr, "Writing to %s" % conffilename
-open(conffilename, "wt").write(conftxt % (os.path.join(os.environ["HOME"], "webapps/%s/apache2/" % APPALLOSQA), os.path.join(ENVDIR, "lib/python2.5/site-packages/"), os.environ["USER"], os.environ["USER"], os.path.join(ENVDIR, "lib/python2.5/site-packages/"), PORT, PORT, PORT, \
+open(conffilename, "wt").write(conftxt % (os.path.join(os.environ["HOME"], "webapps/%s/apache2/" % APPALLOSQA), os.path.join(ENVDIR, "lib/python2.5/site-packages/"), os.environ["USER"], os.environ["USER"], os.path.join(ENVDIR, "lib/python2.5/site-packages/"), os.path.join(PROJECTDIR, "templates/content/"), PORT, PORT, PORT, \
     EMAILADDRESS, FULLDOMAINNAME,
     os.path.join(os.environ["HOME"], "logs/user/access_%s_log" % WEBSITENAME), os.path.join(os.environ["HOME"], "logs/user/error_%s_log" % WEBSITENAME), os.path.join(PROJECTDIR, "osqa.wsgi"),
-    os.path.join(PROJECTDIR, "templates/content/"), os.path.join(ENVDIR, "lib/python2.5/site-packages/django/contrib/admin/media/"), os.path.join(PROJECTDIR, "templates/content/")))
+    os.path.join(PROJECTDIR, "templates/content/"), os.path.join(ENVDIR, "lib/python2.5/site-packages/django/contrib/admin/media/")))
