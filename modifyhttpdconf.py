@@ -4,7 +4,7 @@ from globals import *
 import os.path
 import sys
 
-conftxt = '''
+generalconftxt = '''
 ServerRoot %s
 LoadModule dir_module modules/mod_dir.so
 LoadModule env_module modules/mod_env.so
@@ -35,6 +35,10 @@ SetHandler none
 #    Allow from all
 #</Directory>
 
+Include conf/osqa/*.conf
+'''
+
+specificconftxt = '''
 Listen %s
 NameVirtualHost 127.0.0.1:%s
 
@@ -52,9 +56,20 @@ NameVirtualHost 127.0.0.1:%s
 </VirtualHost>
 '''
 
-conffilename = os.path.join(os.environ["HOME"], "webapps/%s/apache2/conf/httpd.conf" % APPALLOSQA)
-print >> sys.stderr, "Writing to %s" % conffilename
-open(conffilename, "wt").write(conftxt % (os.path.join(os.environ["HOME"], "webapps/%s/apache2/" % APPALLOSQA), os.path.join(ENVDIR, "lib/python2.5/site-packages/"), os.environ["USER"], os.environ["USER"], os.path.join(ENVDIR, "lib/python2.5/site-packages/"), os.path.join(PROJECTDIR, "templates/content/"), PORT, PORT, PORT, \
+apacheconfdir = os.path.join(os.environ["HOME"], "webapps/%s/apache2/conf/" % APPALLOSQA)
+
+generalconffilename = os.path.join(apacheconfdir, "httpd.conf")
+print >> sys.stderr, "Writing to %s" % generalconffilename
+open(generalconffilename, "wt").write(generalconftxt % (os.path.join(os.environ["HOME"], "webapps/%s/apache2/" % APPALLOSQA), os.path.join(ENVDIR, "lib/python2.5/site-packages/"), os.environ["USER"], os.environ["USER"], os.path.join(ENVDIR, "lib/python2.5/site-packages/"), os.path.join(PROJECTDIR, "templates/content/")))
+
+specificconfdir = os.path.join(apacheconfdir, "osqa")
+if not os.path.exists(specificconfdir):
+    print >> sys.stderr, "mkdir %s" % specificconfdir
+    os.mkdir(specificconfdir)
+
+specificconffilename = os.path.join(specificconfdir, "%s.conf" % APPNAME)
+print >> sys.stderr, "Writing to %s" % specificconffilename
+open(specificconffilename, "wt").write(specificconftxt % (PORT, PORT, PORT, \
     EMAILADDRESS, FULLDOMAINNAME,
     os.path.join(os.environ["HOME"], "logs/user/access_%s_log" % WEBSITENAME), os.path.join(os.environ["HOME"], "logs/user/error_%s_log" % WEBSITENAME), os.path.join(PROJECTDIR, "osqa.wsgi"),
     os.path.join(PROJECTDIR, "templates/content/"), os.path.join(ENVDIR, "lib/python2.5/site-packages/django/contrib/admin/media/")))
