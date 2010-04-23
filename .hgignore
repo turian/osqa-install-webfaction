@@ -1,5 +1,5 @@
 syntax: glob
-batch.log
+batch.log*
 crontab.backup.*
 globals.py
 moreglobals.py
