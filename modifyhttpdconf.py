@@ -15,7 +15,7 @@ LoadModule rewrite_module modules/mod_rewrite.so
 LoadModule wsgi_module modules/mod_wsgi.so
 
 KeepAlive Off
-ServerLimit 2
+ServerLimit 4
 
 #SetEnvIf X-Forwarded-SSL on HTTPS=1
 
