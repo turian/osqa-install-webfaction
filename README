@@ -92,6 +92,8 @@ For TODO items, grep TODO in install.py
 Also:
     * Install database backup.
     * pgfulltext search? Or some search?
+    * awstats by default
+    * Google analytics by default
     * Django South
     * Check that full domain (including subdomain) is valid
     * modifycrontab.py doesn't check if the lines are already in the
