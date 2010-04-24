@@ -1,0 +1,14 @@
+#!/usr/bin/perl -w
+
+$date = `date +'%F-%T'`;
+chop $date;
+
+$cmd = "/usr/local/pgsql/bin/pg_dump -U OSQA_DATABASENAME OSQA_DATABASENAME | gzip -c > ~/backup/OSQA_APPNAME/OSQA_APPNAME-database-$date.pgsql.gz";
+print STDERR "$cmd\n";
+system($cmd);
+
+$cmd = "rm ~/backup/OSQA_APPNAME/OSQA_APPNAME-database-last.pgsql.gz ; ln -s ~/backup/OSQA_APPNAME/OSQA_APPNAME-database-$date.pgsql.gz ~/backup/OSQA_APPNAME/OSQA_APPNAME-database-last.pgsql.gz";
+print STDERR "$cmd\n";
+system("$cmd");
+
+system("chmod -R go-rwx ~/backup");

@@ -24,6 +24,7 @@ names = {
 }
 
 outtxt = ""
+outtxt += "echo '0 4 * * *\t\t%s';" % (os.path.join(os.environ["HOME"], "backup/backup-%s-database.pl" % APPNAME))
 
 for name in names:
     cronfilename = os.path.join(PROJECTDIR, "cron/%s" % name)
