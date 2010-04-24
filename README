@@ -58,6 +58,9 @@ Instructions for each OSQA:
     ==========
     * Combined version of above, after you have created globals.py:
         ./batch.sh 2>&1 | tee batch.log.`date +'%F-%T'`
+    * If anything breaks in the middle and you have to run it manually, make sure you type:
+        eval $(./makeenv.py )
+    to set up the appropriate environment variables in that shell.
 
 Webfaction setup:
     * Put the following in ~/.bashrc, then 'source ~/.bashrc':
