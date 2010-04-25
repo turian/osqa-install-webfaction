@@ -8,8 +8,8 @@ echo "Write the following:"
 echo "no";
 python manage.py syncdb
 
-# South migration
-python manage.py migrate forum 0001 --fake
+## South migration
+#python manage.py migrate forum 0001 --fake
 
 chmod +x ./cron/send_email_alerts ./cron/multi_award_badges ./cron/once_award_badges
 # The following are just to test the database out

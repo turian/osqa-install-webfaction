@@ -96,6 +96,7 @@ NOTES:
 
 For TODO items, grep TODO in install.py
 Also:
+    * Enable South, (Disabled because of OSQA-171: http://jira.osqa.net/browse/OSQA-171)
     * pgfulltext search? Or some search?
     * awstats by default
     * Google analytics by default
