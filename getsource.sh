@@ -13,7 +13,7 @@ source $OSQA_ENVDIR/bin/activate
 
 # REMOVEME: Should modify osqa-requirements.txt to use this instead of markdown2
 easy_install-2.5 --prefix $OSQA_ENVDIR markdown
-#easy_install-2.5 --prefix $OSQA_ENVDIR South
+easy_install-2.5 --prefix $OSQA_ENVDIR South
 easy_install-2.5 --prefix $OSQA_ENVDIR django-debug-toolbar
 
 # [Optional] If you want a MySQL database

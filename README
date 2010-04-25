@@ -102,15 +102,13 @@ NOTES:
 
 For TODO items, grep TODO in install.py
 Also:
-    * Enable South, (Disabled because of OSQA-171: http://jira.osqa.net/browse/OSQA-171)
-    * pgfulltext search? Or some search?
     * awstats by default
     * Google analytics by default
+    * sphinx search instead of pgfulltext?
     * Check that full domain (including subdomain) is valid
     * modifycrontab.py doesn't check if the lines are already in the
     crontab, so it might add duplicates if you run it twice!
     * Toggle DEBUG mode
-    * Want PostgreSQL, not MySQL
     * Want SERVE_MEDIA=False, and an Nginx media server
     * You should log in to the admin interface (http://DOMAIN.com/admin/),
     and go to "Sites > Sites", and change the domain name that is used in
