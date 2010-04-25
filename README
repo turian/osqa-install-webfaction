@@ -62,6 +62,12 @@ Instructions for each OSQA:
         eval $(./makeenv.py )
     to set up the appropriate environment variables in that shell.
 
+Note:
+    * If you run the setup several times, you should look at your crontab
+    and .pgpass to make sure there aren't duplicates:
+        crontab -e
+        vi ~/.pgpass
+
 Webfaction setup:
     * Put the following in ~/.bashrc, then 'source ~/.bashrc':
 export UTILS="$HOME/utils/"
