@@ -1,7 +1,9 @@
 #!/bin/sh
 
 mkdir -p $OSQA_PROJECTDIR
-svn co http://svn.osqa.net/svnroot/osqa/trunk $OSQA_PROJECTDIR
+#svn co http://svn.osqa.net/svnroot/osqa/trunk $OSQA_PROJECTDIR
+#hg clone ssh://metaoptimize.com/repos/myosqa $OSQA_PROJECTDIR
+hg clone /home/turian/repos/myosqa $OSQA_PROJECTDIR
 cd $OSQA_PROJECTDIR
 
 # Make a directory for logs
