@@ -22,8 +22,14 @@ Instructions for each OSQA:
 
     * Run ./install-webfaction-cpanel.py
 
+    * Get awstats cpanel configured:
+        ./install-webfaction-cpanel-awstats.py
+
     * Get OSQA env variables:
         eval $(./makeenv.py )
+
+    * Configure awstats:
+        ./configureawstats.sh
 
     * Get the OSQA source + make a virtualenv:
         ./getsource.sh
@@ -96,6 +102,7 @@ cd cd osqa-install-webfaction/
 
 Webfaction API documentation here:
     http://docs.webfaction.com/xmlrpc-api/tutorial.html
+    http://docs.webfaction.com/xmlrpc-api/apiref.html
 
 NOTES:
     * All OSQA sites should share one env dir (ENVDIR).

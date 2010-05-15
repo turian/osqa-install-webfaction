@@ -28,6 +28,9 @@ MAILBOXUSERNAME = APPNAME   # Webfaction mailbox username
 MAILBOXPASSWORD = None      # Webfaction mailbox password. If None,
                             # pick a random password.
 
+AWSTATS_APPNAME = APPNAME + "_awstats"  # Awstats Webfaction application name
+AWSTATS_URLPATH = URLPATH + "awstats"  # Awstats URL path of the forum
+
 if SUBDOMAINNAME is None:
     FULLDOMAINNAME = DOMAINNAME
 else:
