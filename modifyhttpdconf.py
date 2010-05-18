@@ -53,6 +53,7 @@ NameVirtualHost 127.0.0.1:%s
     #otherwise django will be crunching images through itself wasting time
     Alias /content/ %s
     Alias /forum/admin/media/ %s
+    Alias /admin_media/ %s
 </VirtualHost>
 '''
 
@@ -60,7 +61,7 @@ apacheconfdir = os.path.join(os.environ["HOME"], "webapps/%s/apache2/conf/" % AP
 
 generalconffilename = os.path.join(apacheconfdir, "httpd.conf")
 print >> sys.stderr, "Writing to %s" % generalconffilename
-open(generalconffilename, "wt").write(generalconftxt % (os.path.join(os.environ["HOME"], "webapps/%s/apache2/" % APPALLOSQA), os.path.join(ENVDIR, "lib/python2.5/site-packages/"), os.environ["USER"], os.environ["USER"], os.path.join(ENVDIR, "lib/python2.5/site-packages/"), os.path.join(PROJECTDIR, "templates/content/")))
+open(generalconffilename, "wt").write(generalconftxt % (os.path.join(os.environ["HOME"], "webapps/%s/apache2/" % APPALLOSQA), os.path.join(ENVDIR, "lib/python2.5/site-packages/"), os.environ["USER"], os.environ["USER"], os.path.join(ENVDIR, "lib/python2.5/site-packages/"), os.path.join(PROJECTDIR, "templates/content/")), os.path.join(PROJECTDIR, "templates/content/")))
 
 specificconfdir = os.path.join(apacheconfdir, "osqa")
 if not os.path.exists(specificconfdir):
