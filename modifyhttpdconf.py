@@ -61,7 +61,7 @@ apacheconfdir = os.path.join(os.environ["HOME"], "webapps/%s/apache2/conf/" % AP
 
 generalconffilename = os.path.join(apacheconfdir, "httpd.conf")
 print >> sys.stderr, "Writing to %s" % generalconffilename
-open(generalconffilename, "wt").write(generalconftxt % (os.path.join(os.environ["HOME"], "webapps/%s/apache2/" % APPALLOSQA), os.path.join(ENVDIR, "lib/python2.5/site-packages/"), os.environ["USER"], os.environ["USER"], os.path.join(ENVDIR, "lib/python2.5/site-packages/"), os.path.join(PROJECTDIR, "templates/content/")), os.path.join(PROJECTDIR, "templates/content/")))
+open(generalconffilename, "wt").write(generalconftxt % (os.path.join(os.environ["HOME"], "webapps/%s/apache2/" % APPALLOSQA), os.path.join(ENVDIR, "lib/python2.5/site-packages/"), os.environ["USER"], os.environ["USER"], os.path.join(ENVDIR, "lib/python2.5/site-packages/"), os.path.join(PROJECTDIR, "templates/content/")))
 
 specificconfdir = os.path.join(apacheconfdir, "osqa")
 if not os.path.exists(specificconfdir):
@@ -73,4 +73,4 @@ print >> sys.stderr, "Writing to %s" % specificconffilename
 open(specificconffilename, "wt").write(specificconftxt % (PORT, PORT, PORT, \
     EMAILADDRESS, FULLDOMAINNAME,
     os.path.join(os.environ["HOME"], "logs/user/access_%s_log" % WEBSITENAME), os.path.join(os.environ["HOME"], "logs/user/error_%s_log" % WEBSITENAME), os.path.join(PROJECTDIR, "osqa.wsgi"),
-    os.path.join(PROJECTDIR, "templates/content/"), os.path.join(ENVDIR, "lib/python2.5/site-packages/django/contrib/admin/media/")))
+    os.path.join(PROJECTDIR, "templates/content/"), os.path.join(ENVDIR, "lib/python2.5/site-packages/django/contrib/admin/media/"), os.path.join(ENVDIR, "lib/python2.5/site-packages/django/contrib/admin/media/")))
