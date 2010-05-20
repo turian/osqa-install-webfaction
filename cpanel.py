@@ -19,6 +19,11 @@ def try_remove(server, session_id, name, type, delete_thing, list_thing, namenam
     
     # If the something already exists, remove it before adding it
     if to_delete:
+        import time
+        for i in range(10, 0, -1):
+            print "Going to remove %s %s (%s), sleeping %d seconds..." % (type, name, `delete_extra_params`, i)
+            time.sleep(1)
+
         print >> sys.stderr, "%s %s already exists. Removing..." % (type, name)
 #        print >> sys.stderr, delete_thing, ([session_id, name] + delete_extra_params)
         r = server.__getattr__(delete_thing)(*([session_id, name] + delete_extra_params))

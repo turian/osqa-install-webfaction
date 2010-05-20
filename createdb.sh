@@ -11,7 +11,6 @@ python manage.py syncdb --all
 # South migration
 python manage.py migrate forum --fake
 
-chmod +x ./cron/send_email_alerts ./cron/multi_award_badges ./cron/once_award_badges
+chmod +x ./cron/send_email_alerts
 # The following are just to test the database out
-./cron/multi_award_badges
-./cron/once_award_badges
+./cron/send_email_alerts

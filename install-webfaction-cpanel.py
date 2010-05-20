@@ -33,7 +33,8 @@ if SERVERIP is None:
 # TODO: Add https here
 # TODO: Add subdomains www and stats here
 # TODO: Add path location of application here
-r = force_create(server, session_id, WEBSITENAME, "website", "create_website", "delete_website", "list_websites",  [SERVERIP, False, [FULLDOMAINNAME], [APPNAME, URLPATH]])
+# TODO: If the domain already exists, we should UPDATE it
+r = force_create(server, session_id, WEBSITENAME, "website", "create_website", "delete_website", "list_websites",  [SERVERIP, False, [FULLDOMAINNAME], [APPNAME, URLPATH]], overwrite=False)
 
 if DATABASEPASSWORD is None:
     import randompassword
