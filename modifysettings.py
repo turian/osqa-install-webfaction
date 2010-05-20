@@ -12,10 +12,6 @@ if DATABASETYPE == 'postgresql':
 else:
     THISDATABASETYPE = DATABASETYPE
 
-FULLURL_notrailingslash = FULLURL
-while FULLURL_notrailingslash[-1] == "/":
-    FULLURL_notrailingslash = FULLURL_notrailingslash[:-1]
-
 values = {
 'DATABASE_ENGINE': THISDATABASETYPE,
 'DATABASE_NAME': DATABASENAME,
@@ -28,7 +24,7 @@ values = {
 'DEFAULT_FROM_EMAIL': EMAILADDRESS,
 'SERVER_EMAIL': EMAILADDRESS,
 'CONTACT_EMAIL': EMAILADDRESS,
-'APP_URL': "http://%s" % FULLURL_notrailingslash,
+'APP_URL': "http://%s" % FULLDOMAINNAME,
 }
 
 import re
