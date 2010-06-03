@@ -21,7 +21,7 @@ def try_remove(server, session_id, name, type, delete_thing, list_thing, namenam
     if to_delete:
         import time
         for i in range(10, 0, -1):
-            print "Going to remove %s %s (%s), sleeping %d seconds..." % (type, name, `delete_extra_params`, i)
+            print >> sys.stderr, "Going to remove %s %s (%s), sleeping %d seconds..." % (type, name, `delete_extra_params`, i)
             time.sleep(1)
 
         print >> sys.stderr, "%s %s already exists. Removing..." % (type, name)
