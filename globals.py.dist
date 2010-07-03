@@ -37,11 +37,16 @@ else:
     FULLDOMAINNAME = "%s.%s" % (SUBDOMAINNAME, DOMAINNAME)
 FULLURL = FULLDOMAINNAME + URLPATH
 
+FULLDOMAINNAME_dotsfixed = FULLDOMAINNAME.replace(".", "\\\\\\\\.")
+
 EMAILADDRESS = "%s@%s" % (EMAILUSERNAME, FULLDOMAINNAME)  # Email address for the admin
 
 import os, os.path
 WEBAPPDIR = os.path.join(os.environ["HOME"], "webapps/%s/" % APPNAME)
 PROJECTDIR = os.path.join(WEBAPPDIR, "projects/osqa/")
+
+URLPATH_RELATEDQUESTIONS = os.path.join(URLPATH, "questions/related_questions/")
+URLPATH_RELATEDQUESTIONS_slashfixed = URLPATH_RELATEDQUESTIONS.replace("/", "\\\\/")
 
 APPALLOSQA = "allosqa"      # The mod_wsgi 2.5/Python 2.5 application name that serves all the OSQA sites.
 WEBALLOSQADIR = os.path.join(os.environ["HOME"], "webapps/%s/" % APPALLOSQA)
